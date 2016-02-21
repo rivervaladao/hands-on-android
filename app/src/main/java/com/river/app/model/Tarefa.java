@@ -1,6 +1,8 @@
 package com.river.app.model;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by cezar on 20/02/16.
@@ -18,6 +20,20 @@ public class Tarefa {
         this.decricao = decricao;
         this.resumo = resumo;
         this.categoria = categoria;
+        //random date
+        Calendar gc = Calendar.getInstance();
+        int start= 2016;
+        int end = 2017;
+        int year =  start + (int)Math.round(Math.random() * (end - start));
+
+        gc.set(gc.YEAR, year);
+
+        start = 1;
+        end = gc.getActualMaximum(gc.DAY_OF_YEAR);
+        int dayOfYear = start + (int)Math.round(Math.random() * (end - start));
+
+        gc.set(gc.DAY_OF_YEAR, dayOfYear);
+        this.quando = gc.getTime();
 
     }
 

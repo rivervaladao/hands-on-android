@@ -10,6 +10,8 @@
     card_view:cardElevation="@dimen/card_elevation">
 
     <LinearLayout
+        android:id="@+id/tarefaRowHolder"
+        android:background="?android:selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

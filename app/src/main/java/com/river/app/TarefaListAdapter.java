@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.river.app.model.DBTarefas;
@@ -15,10 +15,11 @@ import com.river.app.model.Tarefa;
 /**
  * Created by cezar on 20/02/16.
  */
-public class TarefasListAdapter extends RecyclerView.Adapter<TarefasListAdapter.ViewHolder> {
+public class TarefaListAdapter extends RecyclerView.Adapter<TarefaListAdapter.ViewHolder> {
     Context mContext;
+    OnItemClickListener mItemClickListener;
 
-    public TarefasListAdapter(Context mContext) {
+    public TarefaListAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -50,9 +51,9 @@ public class TarefasListAdapter extends RecyclerView.Adapter<TarefasListAdapter.
                 categoriaColor = mContext.getResources().getColor(R.color.light_orange);
                 break;
         }
-        //holder.tarefaCategoriaImage.setImageDrawable(categoriaColor);
+
         holder.rowCardView.setCardBackgroundColor(categoriaColor);
-        ;
+
     }
 
     @Override
@@ -60,17 +61,37 @@ public class TarefasListAdapter extends RecyclerView.Adapter<TarefasListAdapter.
         return DBTarefas.tarefaList().size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public LinearLayout tarefaHolder;
         public TextView tarefaResumo;
         public TextView tarefaCategoria;
         public TextView tarefaDescricao;
+        public TextView tarefaData;
+
         public CardView rowCardView;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            tarefaHolder = (LinearLayout) itemView.findViewById(R.id.tarefaRowHolder);
+            tarefaHolder.setOnClickListener(this);
             //tarefaDescricao = (TextView) itemView.findViewById(R.id.tarefaDescricao);
             tarefaResumo = (TextView) itemView.findViewById(R.id.tarefaResumo);
             rowCardView = (CardView) itemView.findViewById(R.id.tarefaCard);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(itemView, getPosition());
+            }
+        }
+
+    }
+    //manipulador para click no item ausente no RecyclerView
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
     }
 }

@@ -1,3 +1,33 @@
+##Passo 02
+
+ * Adicionar layout `res/layout/fragment_detail_tarefa.xml`
+ 
+ * Adicionar manipulador de evento para click no item de tarefa, modificar `TarefaListAdapter` e adicionar
+ interface 
+ 
+ ```java
+     //1
+     private OnItemClickListener mItemClickListener;
+     //2
+     public interface OnItemClickListener {
+         void onItemClick(View view, int position);
+     }
+     //3
+     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
+         this.mItemClickListener = mItemClickListener;
+     }
+     //4
+     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {  
+        //5
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null) {
+                 mItemClickListener.onItemClick(itemView, getPosition());
+            }
+        }
+     }
+ ```
+ 
 ##Passo 01  
 RecyclerView, Adpter e Material Design (SDK >= 21)
 
