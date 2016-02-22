@@ -1,7 +1,17 @@
-##Passo 02
+## Passo 02
 
  * Adicionar layout `res/layout/fragment_detail_tarefa.xml`
  
+ * Observar atibuto `android:background=?android:selectableItemBackground` cria efeito onda ao clicar
+ 
+ ```xml
+     <LinearLayout
+         android:id="@+id/tarefaRowHolder"
+         android:background="?android:selectableItemBackground">
+
+     </LinearLayout>
+```
+
  * Adicionar manipulador de evento para click no item de tarefa, modificar `TarefaListAdapter` e adicionar
  interface 
  
@@ -34,15 +44,30 @@
          tarefaHolder.setOnClickListener(this);
      }
  ```
+ 
  * Usando fragmento para mostrar detalhe ao clicar no item da tarefa `res/layout/fragment_detail_tarefa.xml`
+ 
  ```java
-                     getSupportFragmentManager()
-                             .beginTransaction()
-                             .replace(R.id.main_layout, tarefaDetailFragment, "tarefaDeatailFragment")
-                             .addToBackStack(null)
-                             .commit();
+    TarefaListAdapter.OnItemClickListener onItemClickListener = new TarefaListAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(View view, int position) {
+            if (savedInstanceState == null) {
+                final Tarefa tarefa = DBTarefas.tarefaList().get(position);
+
+                final TarefaDetailFragment tarefaDetailFragment = TarefaDetailFragment.newInstance(MainActivity.this,tarefa);
+
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_layout, tarefaDetailFragment, "tarefaDeatailFragment")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        }
+    };
  ```
+ 
  * Usar fragmentos ao inves de Activity, [REUSO, MODURALIDADE, ADAPTABILIDADE]
+ 
  ```java
  public class TarefaDetailFragment extends Fragment {
      //Obrigatorio para FragmentManager
@@ -56,7 +81,7 @@
 
  }
  ```
-##Passo 01  
+## Passo 01  
 RecyclerView, Adpter e Material Design (SDK >= 21)
 
 * Adicionar dependencias em  `build.gradle`
