@@ -25,9 +25,37 @@
                  mItemClickListener.onItemClick(itemView, getPosition());
             }
         }
+        
+     }
+     //6
+     public ViewHolder(View itemView) {
+         super(itemView);
+
+         tarefaHolder.setOnClickListener(this);
      }
  ```
- 
+ * Usando fragmento para mostrar detalhe ao clicar no item da tarefa `res/layout/fragment_detail_tarefa.xml`
+ ```java
+                     getSupportFragmentManager()
+                             .beginTransaction()
+                             .replace(R.id.main_layout, tarefaDetailFragment, "tarefaDeatailFragment")
+                             .addToBackStack(null)
+                             .commit();
+ ```
+ * Usar fragmentos ao inves de Activity, [REUSO, MODURALIDADE, ADAPTABILIDADE]
+ ```java
+ public class TarefaDetailFragment extends Fragment {
+     //Obrigatorio para FragmentManager
+     public TarefaDetailFragment() {
+     }
+     //padrao factory
+     public static TarefaDetailFragment newInstance(){
+     ....
+         return fragment;
+     }
+
+ }
+ ```
 ##Passo 01  
 RecyclerView, Adpter e Material Design (SDK >= 21)
 
