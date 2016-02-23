@@ -1,3 +1,46 @@
+## Passo 03
+* Alterando style.xml para ocultar ActionBar e usar ToolBar 
+
+1 - Criar diretorio res/values-21 e editar style.xml em res/values e res/values-21
+ 
+```xml
+<resources>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay"
+        parent="ThemeOverlay.AppCompat.Light"/>
+</resources>
+```
+
+* Adcionando toolbar para apps com suporte  
+Toolbar toolbar;
+ 
+```xml
+ <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:minHeight="?android:attr/actionBarSize"
+        android:transitionName="tActionBar"/>
+```
+
+* configurando na activity
+         
+```java
+private void initInstances() {
+    toolbar = (Toolbar) findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar); // compatibilidade setActionBar -> setSupportActionBar
+    ...
+}
+```
+
 ## Passo 02
 
  * Adicionar layout `res/layout/fragment_detail_tarefa.xml`
