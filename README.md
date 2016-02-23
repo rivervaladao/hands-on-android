@@ -1,7 +1,7 @@
 ## Passo 03
 * Alterando style.xml para ocultar ActionBar e usar ToolBar 
 
-1 - Criar diretorio res/values-21 e editar style.xml em res/values e res/values-21
+2 - Criar diretorio res/values-21 e editar style.xml em res/values e res/values-21
  
 ```xml
 <resources>
@@ -40,6 +40,43 @@ private void initInstances() {
     ...
 }
 ```
+
+* configurando Menu em MainActivity import arquivos para icones em 
+
+```
+res/
+  drawable-xxhdpi/
+    __ic_action_grid.png
+    __ic_action_list.png
+        
+```
+
+* adicione Menu em 
+
+```
+res/
+    menu/
+    __menu_main.xlm
+```
+
+```xml
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+  tools:context=".MainActivity">
+
+  <item
+    android:id="@+id/action_toggle"
+    android:icon="@drawable/ic_action_grid"
+    app:showAsAction="always"
+    android:orderInCategory="100"
+    android:title="Show as grid" />
+
+</menu>
+```    
+
+* adicione manipulador onclick do FAB para apresentar um Snackbar em MainActivity
+* adicione efeito toggle()
 
 ## Passo 02
 
