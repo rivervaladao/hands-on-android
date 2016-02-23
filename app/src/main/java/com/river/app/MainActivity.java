@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.river.app.model.DBTarefas;
 import com.river.app.model.Tarefa;
-import com.river.app.model.TarefaDetailFragment;
 
 /**
  * Created by cezar on 20/02/16.
@@ -26,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
     private TarefaListAdapter mAdapter;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
                             .replace(R.id.main_layout, tarefaDetailFragment, "tarefaDeatailFragment")
                             .addToBackStack(null)
                             .commit();
+                    //ESCONDE
+                    fab.hide();
                 }
             }
         };
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
         isListView = true;
 
-        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 }).show();
             }
         });
+
+        fab.show();
 
     }
 
@@ -113,5 +117,12 @@ public class MainActivity extends AppCompatActivity {
             item.setTitle("Show as grid");
             isListView = true;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        //mostra FAB
+        fab.show();
+        super.onBackPressed();
     }
 }

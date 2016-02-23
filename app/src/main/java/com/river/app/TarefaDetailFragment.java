@@ -1,18 +1,16 @@
-package com.river.app.model;
+package com.river.app;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.river.app.R;
+import com.river.app.model.CategoriaTarefa;
+import com.river.app.model.Tarefa;
 
 /**
  * Created by cezar on 21/02/16.
