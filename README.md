@@ -46,8 +46,8 @@ private void initInstances() {
 ```
 res/
   drawable-xxhdpi/
-    __ic_action_grid.png
-    __ic_action_list.png
+    ic_action_grid.png
+    ic_action_list.png
         
 ```
 
@@ -56,7 +56,7 @@ res/
 ```
 res/
     menu/
-    __menu_main.xlm
+     menu_main.xlm
 ```
 
 ```xml
