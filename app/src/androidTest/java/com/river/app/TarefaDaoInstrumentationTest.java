@@ -51,6 +51,9 @@ public class TarefaDaoInstrumentationTest{
     }
     @Test
     public void getById(){
+
+        populate();
+
         Cursor cursor = dao.getDb().query(DatabaseHelper.Todo.TABLE_NAME,DatabaseHelper.Todo.COLUMNS,null,null,null,null,null);
         int _ids=-1;
         String _resume=null;
@@ -63,6 +66,7 @@ public class TarefaDaoInstrumentationTest{
             Assert.assertEquals(t.getResumo(),_resume);
 
         }
+        dao.removerTodasAsTarefas();
 
     }
     public void populate(){
