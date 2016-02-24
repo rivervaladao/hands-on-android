@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
  * Created by cezar on 20/02/16.
  */
 public class Tarefa {
+    private Long id;
     private String decricao;
     private Date quando;
     private String resumo;
@@ -15,11 +16,17 @@ public class Tarefa {
 
     public Tarefa() { }
 
+    public Tarefa(Long id,String resumo,String decricao, String categoria, Date data) {
+        this(decricao, resumo, CategoriaTarefa.valueOf(categoria));
+        this.quando = data;
+    }
     public Tarefa(String decricao, String resumo, CategoriaTarefa categoria) {
         this();
         this.decricao = decricao;
         this.resumo = resumo;
         this.categoria = categoria;
+        this.quando = Calendar.getInstance().getTime();
+        /*
         //random date
         Calendar gc = Calendar.getInstance();
         int start= 2016;
@@ -34,6 +41,7 @@ public class Tarefa {
 
         gc.set(gc.DAY_OF_YEAR, dayOfYear);
         this.quando = gc.getTime();
+        */
 
     }
 
@@ -67,5 +75,13 @@ public class Tarefa {
 
     public void setCategoria(CategoriaTarefa categoria) {
         this.categoria = categoria;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

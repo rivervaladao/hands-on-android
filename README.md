@@ -1,3 +1,16 @@
+## Passo 04
+
+* Usando  `android.support.design.widget.CoordinatorLayout` como root em `acttivity_main.xml`
+
+* Criar `content_main.xml` com container root
+
+* Mover RecyclerView, FAB e Menu para `fragment_tarefa_list.xml`
+
+* Mover Menu para `fragment_tarefa_lista.xml`
+
+* Criar fragmento para Adição e Alteração de dados de tarefa `fragment_add_edit.xml`
+
+
 ## Passo 03
 * Alterando style.xml para ocultar ActionBar e usar ToolBar 
 
