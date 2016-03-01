@@ -55,17 +55,24 @@ public class TarefaDao {
     }
 
     public List<Tarefa> listarTarefas() {
-        Cursor cursor = getDb().query(DatabaseHelper.Todo.TABLE_NAME,
-                DatabaseHelper.Todo.COLUMNS,
-                null, null, null, null, null);
+        List<Tarefa> tarefas=null;
+        try {
+            Cursor cursor = getDb().query(DatabaseHelper.Todo.TABLE_NAME,
+                    DatabaseHelper.Todo.COLUMNS,
+                    null, null, null, null, null);
 
-        List<Tarefa> tarefas = new ArrayList<Tarefa>();
+            tarefas = new ArrayList<Tarefa>();
 
-        while (cursor.moveToNext()) {
-            Tarefa tarefa = criarTarefa(cursor);
-            tarefas.add(tarefa);
+            while (cursor.moveToNext()) {
+                Tarefa tarefa = criarTarefa(cursor);
+                tarefas.add(tarefa);
+            }
+            cursor.close();
+
+        }finally {
+            helper.close();
         }
-        cursor.close();
+
         return tarefas;
     }
 

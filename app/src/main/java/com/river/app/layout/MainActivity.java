@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.river.app.R;
-import com.river.app.dao.TarefaDao;
 import com.river.app.helper.ListViewHelper;
 import com.river.app.model.Tarefa;
 
@@ -20,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements
         AddEditFragment.AddEditFragmentListener {
 
     private static final String FRAGMENT_KEY = "tarefaListFragment";
+    private View fragmentContainer;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -33,22 +33,24 @@ public class MainActivity extends AppCompatActivity implements
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getSupportActionBar().setElevation(5);
         }
-        Fragment tarefaListFragment = new TarefaListFragment();
 
-        View container = findViewById(R.id.fragmentContainer);
+        if (savedInstanceState == null && findViewById(R.id.phoneFragmentContainer) != null) {
+            fragmentContainer = findViewById(R.id.phoneFragmentContainer);
+            Fragment tarefaListFragment = new TarefaListFragment();
 
-        if (savedInstanceState == null && container != null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(container.getId(), tarefaListFragment, FRAGMENT_KEY)
+                    .add(fragmentContainer.getId(), tarefaListFragment, FRAGMENT_KEY)
                     .commit();
+        } else {
+            fragmentContainer = findViewById(R.id.tabletFragmentContainer);
         }
 
     }
 
     private void showAddEditFragment(int viewID) {
         AddEditFragment addEditFragment = new AddEditFragment();
-        getSupportActionBar().hide();
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(viewID, addEditFragment)
@@ -82,18 +84,25 @@ public class MainActivity extends AppCompatActivity implements
     public void onAddEditCompleted(Uri taskUri) {
         getSupportFragmentManager().popBackStack();
         //update list with notifyDataSetChanged
-        getSupportActionBar().show();
+
 
     }
 
     @Override
     public void onAddEditFABClick() {
-        showAddEditFragment(R.id.fragmentContainer);
+        if (findViewById(R.id.phoneFragmentContainer) != null)
+            showAddEditFragment(R.id.phoneFragmentContainer);
+        else //tablet put to rigth side
+            showAddEditFragment(R.id.rightPaneContainer);
+
     }
 
     @Override
     public void onItemListClick(View view, int position) {
-        showTarefaDetailFragment(R.id.fragmentContainer, position);
+        if (findViewById(R.id.phoneFragmentContainer) != null)
+            showTarefaDetailFragment(R.id.phoneFragmentContainer, position);
+        else
+            showTarefaDetailFragment(R.id.rightPaneContainer, position);
     }
 }
 

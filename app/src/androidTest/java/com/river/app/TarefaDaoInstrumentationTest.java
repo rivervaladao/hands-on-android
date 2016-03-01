@@ -32,7 +32,7 @@ public class TarefaDaoInstrumentationTest{
     @Before
     public void setUp() throws Exception {
         Context context = new RenamingDelegatingContext(
-                InstrumentationRegistry.getInstrumentation().getTargetContext(), "test_");
+                InstrumentationRegistry.getInstrumentation().getTargetContext(), "");
         dao = new TarefaDao(context);
     }
 

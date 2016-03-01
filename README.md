@@ -10,6 +10,14 @@
 
 * Criar fragmento para Adição e Alteração de dados de tarefa `fragment_add_edit.xml`
 
+* Incluindo persistencia com SQLite3, classes DatabaseHelper, TarefaDao, alterar contrutor
+
+* JUnit4, teste unitário para classe TarefaDao
+
+* Adiciona menu de Editar, Alterar na Toolbar do fragmento TarefaDetailFragment
+
+*  Listener para manipular eventos de 
+
 
 ## Passo 03
 * Alterando style.xml para ocultar ActionBar e usar ToolBar 
